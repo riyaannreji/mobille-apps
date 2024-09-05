@@ -1,0 +1,62 @@
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android" >
+<EditText
+android:id="@+id/uname1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Username" />
+<EditText
+android:id="@+id/pass1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Password"
+android:inputType="textPassword"
+android:minHeight="48dp" />
+<Button
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Login"
+android:onClick="Login"/>
+</LinearLayout>
+MainActivity.java:
+package com.example.firstprogram;
+import android.os.Bundle;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.view.View;
+public class MainActivity extends AppCompatActivity {
+private EditText unameEditText;
+private EditText passEditText;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+
+EdgeToEdge.enable(this);
+setContentView(R.layout.activity_main);
+unameEditText = findViewById(R.id.uname1);
+passEditText = findViewById(R.id.pass1);
+}
+public void Login(View view) {
+String username = unameEditText.getText().toString();
+String password = passEditText.getText().toString();
+if (isValidCredentials(username,password))
+{
+Toast.makeText(this,"login Successful",Toast.LENGTH_SHORT).show();
+}
+else
+{
+Toast.makeText(this,"invalid credentials",Toast.LENGTH_SHORT).show();
+}
+}
+private boolean isValidCredentials(String username,String password)
+{
+return username.equals("Admin") && password.equals("1234");
+}
+}
